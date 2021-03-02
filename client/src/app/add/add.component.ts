@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BudgetService } from '../services/budget.service'
+import {NgForm} from '@angular/forms'
 
 @Component({
   selector: 'app-add',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
-  constructor() { }
+  constructor(public budgetService: BudgetService) { }
 
   ngOnInit(): void {
+ 
   }
 
+  addBudget(form: NgForm){
+    this.budgetService.addBudget(form.value).subscribe(
+     res => {
+      form.reset()
+     })}
 }

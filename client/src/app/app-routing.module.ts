@@ -5,8 +5,6 @@ import {ExpenseComponent} from './expense/expense.component';
 import { HomeComponent } from "./home/home.component";
 import { AddComponent } from "./add/add.component";
 
-
-
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'income', component: IncomeComponent},

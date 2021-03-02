@@ -1,1 +1,43 @@
-<p>expense works!</p>
+<ol class="breadcrumb">List of Expense</ol> 
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-dark">
+            <thead>
+                <tr class="table-danger">
+                    <th> Concept</th>
+                    <th> Amount</th>
+                    <th> Date</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let record of budgetService.budget" class="table-active">
+                    <td>{{record.concept}}</td>
+                    <td>{{record.amount}}</td>
+                    <td>{{record.date}}</td>
+                    <td><button class="btn btn-primary" (click)="editBudget(record)">Edit</button><button class="btn btn-danger" (click)="deleteBudget(record.id)" >Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form #budgetForm = "ngForm" >
+                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="budgetService.selectedBudget.id">
+                    <div class="form-group">
+                        <input type="text"placeholder="Edit concept" name="concept" class="form-control" [(ngModel)]="budgetService.selectedBudget.concept">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Edit amount" name="amount" class="form-control" [(ngModel)]="budgetService.selectedBudget.amount">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" name="date" class="form-control" [(ngModel)]="budgetService.selectedBudget.date">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

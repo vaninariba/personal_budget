@@ -11,13 +11,21 @@ const getBudget = async (req, res) => {
     const response = await pool.query('Select id,concept, amount, date, type from budget order by (id) desc limit 10');
     res.status(200).json(response.rows)
 };
-const createBudget = async (req, res) => {
+const getIncome = async (req, res) => {
+    const response = await pool.query("Select id,concept, amount, date from budget where type = 'income' ");
+    res.status(200).json(response.rows)
+};
+const getExpense = async (req, res) => {
+    const response = await pool.query("Select id,concept, amount, date from budget where type = 'expense' ");
+    res.status(200).json(response.rows)
+};
+const addBudget = async (req, res) => {
     const { concept, amount, date,type } = req.body;
     const response = await pool.query('INSERT INTO budget (concept, amount, date,type) VALUES ($1, $2, $3,$4)', [concept, amount, date,type]);
     res.json({
         message: 'Record Added successfully',
         body: {
-            BUDGET: {concept, amount, date,type}
+            budget: {concept, amount, date,type}
         }
     })
 };
@@ -38,13 +46,15 @@ const deleteBudget = async (req, res, next) => {
     res.json(`Record ${id} deleted Successfully`);
 };
 const getBalance = async (req, res) => {
-    const response = await pool.query("SELECT SUM(AMOUNT* CASE type WHEN 'egreso' THEN -1 ELSE 1 END)from budget");
+    const response = await pool.query("SELECT SUM(AMOUNT* CASE type WHEN 'expense' THEN -1 ELSE 1 END)from budget");
     res.status(200).json(response.rows)
 };
 
 module.exports = {
     getBudget,
-    createBudget,
+    getIncome,
+    getExpense,
+    addBudget,
     updateBudget,
     deleteBudget,
     getBalance

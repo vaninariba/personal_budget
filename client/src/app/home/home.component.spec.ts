@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Budget } from '../models/Budget'
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {

@@ -8,11 +8,18 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="table-dark">
-               <td>v</td>
-            <td>v</td>
-            <td>v</td>
-            <td>v</td>
+        <tr class="table-dark"  *ngFor="let record of budgetService.budget" >
+             <td>{{record.concept}}</td>
+             <td>{{record.amount}}</td>
+             <td>{{record.date}}</td>
+             <td>{{record.type}}</td>
         </tr>
     </tbody>
 </table>
+<table>
+    <tr *ngFor="let total of budgetService.sum"> 
+        <td><h2>Balance: ${{total.sum}}</h2></td>
+    </tr>
+</table>
+
+

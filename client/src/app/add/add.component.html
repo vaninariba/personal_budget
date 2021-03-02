@@ -4,20 +4,19 @@
             Add a record
         </div>
         <div class="card-body">
-            <form>
+            <form #budgetForm="ngForm" (ngSubmit)="addBudget(budgetForm)">
                 <div class="form-group">
-                    <input type="text"placeholder="Insert a concept" name="concept" class="form-control">
+                    <input type="text"placeholder="Insert a concept" name="concept" class="form-control" [(ngModel)]="budgetService.selectedBudget.concept">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="Insert amount" name
-                    ="amount" class="form-control">
+                    <input type="text" placeholder="Insert amount" name="amount" class="form-control" [(ngModel)]="budgetService.selectedBudget.amount">
                 </div>
                 <div class="form-group">
-                    <input type="date" name="date" class="form-control">
+                    <input type="date" name="date" class="form-control" [(ngModel)]="budgetService.selectedBudget.date">
                 </div>
                 <div class="form-group">
-                    <label for="exampleSelect1">Select a type</label>
-                    <select class="form-control" name="type">
+                    <label>Select a type</label>
+                    <select class="form-control" name="type" [(ngModel)]="budgetService.selectedBudget.type">
                         <option value="income">Income</option>
                         <option value="expense">Expense</option>
                     </select>
